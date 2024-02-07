@@ -4,10 +4,10 @@
  *
  * @link       https://swapnild.com
  * @since      1.0.0
- * @package    Spotify2Go
+ * @package    PulseShare
  */
 
-namespace Spotify2Go\Classes;
+namespace PulseShare\Classes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -21,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  */
-class Spotify2GoLoader {
+class PulseShareLoader {
 
 	/**
 	 * The array of actions registered with WordPress.
@@ -42,11 +42,11 @@ class Spotify2GoLoader {
 	protected $filters;
 
 	/**
-	 * The current instance of the Spotify2GoLoader class.
+	 * The current instance of the PulseShareLoader class.
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @var object $instance The current instance of the Spotify2GoLoader class.
+	 * @var object $instance The current instance of the PulseShareLoader class.
 	 */
 	private static $instance;
 
@@ -76,18 +76,18 @@ class Spotify2GoLoader {
 	 * @throws \Exception The exception class.
 	 */
 	public function __wakeup() {
-		throw new \Exception( 'Cannot unserialize singleton Spotify2GoLoader' );
+		throw new \Exception( 'Cannot unserialize singleton PulseShareLoader' );
 	}
 
 	/**
-	 * This is the static method that controls the access to the Spotify2GoLoader class instance.
+	 * This is the static method that controls the access to the PulseShareLoader class instance.
 	 *
-	 * @return Spotify2GoLoader
+	 * @return PulseShareLoader
 	 * @since 1.0.0
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new Spotify2GoLoader();
+			self::$instance = new PulseShareLoader();
 		}
 		return self::$instance;
 	}

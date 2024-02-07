@@ -28,40 +28,40 @@ export default class albumEmbedEdit extends Component {
 		const { attributes, setAttributes, clientId } = this.props;
 		const { blockID, albumArray } = attributes;
 
-		if (!blockID) {
-			setAttributes({ blockID: `album-embed-${clientId}` });
+		if ( ! blockID ) {
+			setAttributes( { blockID: `album-embed-${ clientId }` } );
 		}
 
-		if (0 === albumArray.length) {
+		if ( 0 === albumArray.length ) {
 			this.initAlbum();
 		}
 
-		const axiosTokenInstance = axios.create({
+		const axiosTokenInstance = axios.create( {
 			baseURL: 'https://accounts.spotify.com',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		});
+		} );
 
-		const axiosSpotifyInstance = axios.create({
+		const axiosSpotifyInstance = axios.create( {
 			baseURL: 'https://api.spotify.com/v1/',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		});
+		} );
 
 		axiosSpotifyInstance.interceptors.request.use(
-			(config) => {
+			( config ) => {
 				axiosTokenInstance
 					.post(
 						'/api/token',
-						querystring.stringify({
+						querystring.stringify( {
 							grant_type: 'client_credentials',
 							client_id:
-								Spotify2GoAdminVars.sfwe_options.client_id,
+								PulseShareAdminVars.pulseshare_options.client_id,
 							client_secret:
-								Spotify2GoAdminVars.sfwe_options.client_secret,
-						}),
+								PulseShareAdminVars.pulseshare_options.client_secret,
+						} ),
 						{
 							headers: {
 								'Content-Type':
@@ -69,36 +69,39 @@ export default class albumEmbedEdit extends Component {
 							},
 						}
 					)
-					.then((response) => {
-						config.headers.Authorization = `Bearer ${response.data.access_token}`;
-					});
+					.then( ( response ) => {
+						config.headers.Authorization = `Bearer ${ response.data.access_token }`;
+					} );
 
 				return config;
 			},
-			(error) => {
-				return Promise.reject(error);
+			( error ) => {
+				return Promise.reject( error );
 			}
 		);
 
 		axiosSpotifyInstance.interceptors.response.use(
-			(response) => {
+			( response ) => {
 				return response;
 			},
-			async (error) => {
+			async ( error ) => {
 				const originalRequest = error.config;
-				if (error.response.status === 401 && !originalRequest._retry) {
+				if (
+					error.response.status === 401 &&
+					! originalRequest._retry
+				) {
 					originalRequest._retry = true;
 					try {
 						const response = await axiosTokenInstance.post(
 							'/api/token',
-							querystring.stringify({
+							querystring.stringify( {
 								grant_type: 'client_credentials',
 								client_id:
-									Spotify2GoAdminVars.sfwe_options.client_id,
+									PulseShareAdminVars.pulseshare_options.client_id,
 								client_secret:
-									Spotify2GoAdminVars.sfwe_options
+									PulseShareAdminVars.pulseshare_options
 										.client_secret,
-							}),
+							} ),
 							{
 								headers: {
 									'Content-Type':
@@ -106,31 +109,31 @@ export default class albumEmbedEdit extends Component {
 								},
 							}
 						);
-						axiosSpotifyInstance.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`;
-						return axiosSpotifyInstance(originalRequest);
-					} catch (_error) {
-						if (_error.response && _error.response.data) {
-							return Promise.reject(_error.response.data);
+						axiosSpotifyInstance.defaults.headers.common.Authorization = `Bearer ${ response.data.access_token }`;
+						return axiosSpotifyInstance( originalRequest );
+					} catch ( _error ) {
+						if ( _error.response && _error.response.data ) {
+							return Promise.reject( _error.response.data );
 						}
-						return Promise.reject(_error);
+						return Promise.reject( _error );
 					}
 				}
 
-				if (error.response.status === 403 && error.response.data) {
-					return Promise.reject(error.response.data);
+				if ( error.response.status === 403 && error.response.data ) {
+					return Promise.reject( error.response.data );
 				}
-				return Promise.reject(error);
+				return Promise.reject( error );
 			}
 		);
 
 		axiosSpotifyInstance
 			.get(
-				`albums/${Spotify2GoAdminVars.sfwe_options.album_id}/tracks?market=US&limit=50`
+				`albums/${ PulseShareAdminVars.pulseshare_options.album_id }/tracks?market=US&limit=50`
 			)
-			.then((response) => {
+			.then( ( response ) => {
 				const { data } = response;
 				const { items } = data;
-				const tracks = items.map((item) => {
+				const tracks = items.map( ( item ) => {
 					return {
 						id: item.id,
 						name: item.name,
@@ -138,21 +141,21 @@ export default class albumEmbedEdit extends Component {
 						uri: item.uri,
 						type: item.type,
 					};
-				});
-				setAttributes({
+				} );
+				setAttributes( {
 					albumArray: tracks,
-				});
-			})
-			.catch((error) => {
-				console.log(error.toJSON());
-			});
+				} );
+			} )
+			.catch( ( error ) => {
+				console.log( error.toJSON() );
+			} );
 	}
 
 	initAlbum() {
 		const { setAttributes } = this.props;
-		setAttributes({
+		setAttributes( {
 			albumArray: [],
-		});
+		} );
 	}
 
 	render() {
@@ -166,62 +169,62 @@ export default class albumEmbedEdit extends Component {
 			width,
 		} = attributes;
 
-		const classes = classnames(className, 'album-embed');
+		const classes = classnames( className, 'album-embed' );
 
 		return (
 			<>
 				<InspectorControls>
 					<div className="sfwe-block-sidebar">
 						<PanelBody
-							title={__('Settings', 'spotify2go')}
-							initialOpen={true}
+							title={ __( 'Settings', 'pulseshare' ) }
+							initialOpen={ true }
 						>
 							<RadioControl
-								label={__('Display Type', 'spotify2go')}
+								label={ __( 'Display Type', 'pulseshare' ) }
 								help="Select the display type for the album."
-								selected={displayType ? displayType : 'full'}
-								options={[
+								selected={ displayType ? displayType : 'full' }
+								options={ [
 									{ label: 'Full Album', value: 'full' },
 									{ label: 'Single Track', value: 'single' },
-								]}
-								onChange={(type) => {
-									setAttributes({ displayType: type });
-								}}
+								] }
+								onChange={ ( type ) => {
+									setAttributes( { displayType: type } );
+								} }
 							/>
 
-							{displayType === 'single' && (
+							{ displayType === 'single' && (
 								<SelectControl
 									__nextHasNoMarginBottom
-									label={__('Select Track', 'spotify2go')}
+									label={ __( 'Select Track', 'pulseshare' ) }
 									help="Selected track will be displayed in the frontend."
 									value={
 										currentTrack
 											? currentTrack.id
-											: albumArray[0].id
+											: albumArray[ 0 ].id
 									}
-									options={albumArray.map((episode) => {
+									options={ albumArray.map( ( episode ) => {
 										return {
 											label: episode.name,
 											value: episode.id,
 										};
-									})}
-									onChange={(id) => {
-										setAttributes({
+									} ) }
+									onChange={ ( id ) => {
+										setAttributes( {
 											currentTrack: albumArray.find(
-												(episode) => episode.id === id
+												( episode ) => episode.id === id
 											),
-										});
-									}}
+										} );
+									} }
 								/>
-							)}
+							) }
 
 							<UnitControl
 								__next40pxDefaultSize
 								label="Height"
-								onChange={(value) => {
-									setAttributes({ height: value });
-								}}
-								units={[
+								onChange={ ( value ) => {
+									setAttributes( { height: value } );
+								} }
+								units={ [
 									{
 										a11yLabel: 'Pixels (px)',
 										label: 'px',
@@ -234,16 +237,16 @@ export default class albumEmbedEdit extends Component {
 										step: 1,
 										value: '%',
 									},
-								]}
-								value={height}
+								] }
+								value={ height }
 							/>
 							<UnitControl
 								__next40pxDefaultSize
 								label="Width"
-								onChange={(value) => {
-									setAttributes({ width: value });
-								}}
-								units={[
+								onChange={ ( value ) => {
+									setAttributes( { width: value } );
+								} }
+								units={ [
 									{
 										a11yLabel: 'Pixels (px)',
 										label: 'px',
@@ -256,63 +259,63 @@ export default class albumEmbedEdit extends Component {
 										step: 1,
 										value: '%',
 									},
-								]}
-								value={width}
+								] }
+								value={ width }
 							/>
 						</PanelBody>
 					</div>
 				</InspectorControls>
-				<div className={classes} id={blockID}>
+				<div className={ classes } id={ blockID }>
 					<div className="container">
-						<div className={'sfwe-episode'}>
-							{displayType === 'single' && !currentTrack.id && (
+						<div className={ 'sfwe-episode' }>
+							{ displayType === 'single' && ! currentTrack.id && (
 								<div className="notice notice-info alt">
 									<p>
 										<i>
-											{__(
+											{ __(
 												'Please select a track from the block settings.',
-												'spotify2go'
-											)}
+												'pulseshare'
+											) }
 										</i>
 									</p>
 								</div>
-							)}
+							) }
 
-							{displayType === 'single' && currentTrack.id && (
+							{ displayType === 'single' && currentTrack.id && (
 								<iframe
-									id={'sfwe-track-' + currentTrack.id}
+									id={ 'sfwe-track-' + currentTrack.id }
 									frameBorder="0"
 									allowFullScreen=""
 									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 									loading="lazy"
-									width={width ? width : '100%'}
-									height={height ? height : '200'}
+									width={ width ? width : '100%' }
+									height={ height ? height : '200' }
 									src={
 										'https://open.spotify.com/embed/track/' +
 										currentTrack.id
 									}
 								></iframe>
-							)}
-							{displayType === 'full' && (
+							) }
+							{ displayType === 'full' && (
 								<iframe
 									id={
 										'sfwe-album-' +
-										Spotify2GoAdminVars.sfwe_options
+										PulseShareAdminVars.pulseshare_options
 											.album_id
 									}
 									frameBorder="0"
 									allowFullScreen=""
 									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 									loading="lazy"
-									width={width ? width : '100%'}
-									height={height ? height : '380'}
+									width={ width ? width : '100%' }
+									height={ height ? height : '380' }
 									src={
 										'https://open.spotify.com/embed/album/' +
-										Spotify2GoAdminVars.sfwe_options
+										PulseShareAdminVars.pulseshare_options
 											.album_id
 									}
 								></iframe>
-							)}
+							) }
 						</div>
 					</div>
 				</div>

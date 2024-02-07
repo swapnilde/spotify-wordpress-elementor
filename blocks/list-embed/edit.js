@@ -29,40 +29,40 @@ export default class listEmbedEdit extends Component {
 		const { attributes, setAttributes, clientId } = this.props;
 		const { blockID, episodesArray } = attributes;
 
-		if (!blockID) {
-			setAttributes({ blockID: `list-embed-${clientId}` });
+		if ( ! blockID ) {
+			setAttributes( { blockID: `list-embed-${ clientId }` } );
 		}
 
-		if (0 === episodesArray.length) {
+		if ( 0 === episodesArray.length ) {
 			this.initEpisodes();
 		}
 
-		const axiosTokenInstance = axios.create({
+		const axiosTokenInstance = axios.create( {
 			baseURL: 'https://accounts.spotify.com',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		});
+		} );
 
-		const axiosSpotifyInstance = axios.create({
+		const axiosSpotifyInstance = axios.create( {
 			baseURL: 'https://api.spotify.com/v1/',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		});
+		} );
 
 		axiosSpotifyInstance.interceptors.request.use(
-			(config) => {
+			( config ) => {
 				axiosTokenInstance
 					.post(
 						'/api/token',
-						querystring.stringify({
+						querystring.stringify( {
 							grant_type: 'client_credentials',
 							client_id:
-								Spotify2GoAdminVars.sfwe_options.client_id,
+								PulseShareAdminVars.pulseshare_options.client_id,
 							client_secret:
-								Spotify2GoAdminVars.sfwe_options.client_secret,
-						}),
+								PulseShareAdminVars.pulseshare_options.client_secret,
+						} ),
 						{
 							headers: {
 								'Content-Type':
@@ -70,36 +70,39 @@ export default class listEmbedEdit extends Component {
 							},
 						}
 					)
-					.then((response) => {
-						config.headers.Authorization = `Bearer ${response.data.access_token}`;
-					});
+					.then( ( response ) => {
+						config.headers.Authorization = `Bearer ${ response.data.access_token }`;
+					} );
 
 				return config;
 			},
-			(error) => {
-				return Promise.reject(error);
+			( error ) => {
+				return Promise.reject( error );
 			}
 		);
 
 		axiosSpotifyInstance.interceptors.response.use(
-			(response) => {
+			( response ) => {
 				return response;
 			},
-			async (error) => {
+			async ( error ) => {
 				const originalRequest = error.config;
-				if (error.response.status === 401 && !originalRequest._retry) {
+				if (
+					error.response.status === 401 &&
+					! originalRequest._retry
+				) {
 					originalRequest._retry = true;
 					try {
 						const response = await axiosTokenInstance.post(
 							'/api/token',
-							querystring.stringify({
+							querystring.stringify( {
 								grant_type: 'client_credentials',
 								client_id:
-									Spotify2GoAdminVars.sfwe_options.client_id,
+									PulseShareAdminVars.pulseshare_options.client_id,
 								client_secret:
-									Spotify2GoAdminVars.sfwe_options
+									PulseShareAdminVars.pulseshare_options
 										.client_secret,
-							}),
+							} ),
 							{
 								headers: {
 									'Content-Type':
@@ -107,31 +110,31 @@ export default class listEmbedEdit extends Component {
 								},
 							}
 						);
-						axiosSpotifyInstance.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`;
-						return axiosSpotifyInstance(originalRequest);
-					} catch (_error) {
-						if (_error.response && _error.response.data) {
-							return Promise.reject(_error.response.data);
+						axiosSpotifyInstance.defaults.headers.common.Authorization = `Bearer ${ response.data.access_token }`;
+						return axiosSpotifyInstance( originalRequest );
+					} catch ( _error ) {
+						if ( _error.response && _error.response.data ) {
+							return Promise.reject( _error.response.data );
 						}
-						return Promise.reject(_error);
+						return Promise.reject( _error );
 					}
 				}
 
-				if (error.response.status === 403 && error.response.data) {
-					return Promise.reject(error.response.data);
+				if ( error.response.status === 403 && error.response.data ) {
+					return Promise.reject( error.response.data );
 				}
-				return Promise.reject(error);
+				return Promise.reject( error );
 			}
 		);
 
 		axiosSpotifyInstance
 			.get(
-				`shows/${Spotify2GoAdminVars.sfwe_options.show_id}/episodes?market=US&limit=50`
+				`shows/${ PulseShareAdminVars.pulseshare_options.show_id }/episodes?market=US&limit=50`
 			)
-			.then((response) => {
+			.then( ( response ) => {
 				const { data } = response;
 				const { items } = data;
-				const episodes = items.map((item) => {
+				const episodes = items.map( ( item ) => {
 					return {
 						id: item.id,
 						name: item.name,
@@ -143,21 +146,21 @@ export default class listEmbedEdit extends Component {
 						uri: item.uri,
 						type: item.type,
 					};
-				});
-				setAttributes({
+				} );
+				setAttributes( {
 					episodesArray: episodes,
-				});
-			})
-			.catch((error) => {
-				console.log(error.toJSON());
-			});
+				} );
+			} )
+			.catch( ( error ) => {
+				console.log( error.toJSON() );
+			} );
 	}
 
 	initEpisodes() {
 		const { setAttributes } = this.props;
-		setAttributes({
+		setAttributes( {
 			episodesArray: [],
-		});
+		} );
 	}
 
 	render() {
@@ -172,7 +175,7 @@ export default class listEmbedEdit extends Component {
 			width,
 		} = attributes;
 
-		const classes = classnames(className, 'list-embed');
+		const classes = classnames( className, 'list-embed' );
 
 		const video = isVideo ? 'video' : '';
 
@@ -181,76 +184,81 @@ export default class listEmbedEdit extends Component {
 				<InspectorControls>
 					<div className="sfwe-block-sidebar">
 						<PanelBody
-							title={__('Settings', 'spotify2go')}
-							initialOpen={true}
+							title={ __( 'Settings', 'pulseshare' ) }
+							initialOpen={ true }
 						>
 							<RadioControl
-								label={__('Display Type', 'spotify2go')}
+								label={ __( 'Display Type', 'pulseshare' ) }
 								help="Select the display type for the episode."
-								selected={displayType ? displayType : 'full'}
-								options={[
+								selected={ displayType ? displayType : 'full' }
+								options={ [
 									{ label: 'Full Show', value: 'full' },
 									{
 										label: 'Single Episode',
 										value: 'single',
 									},
-								]}
-								onChange={(type) => {
-									setAttributes({ displayType: type });
-								}}
+								] }
+								onChange={ ( type ) => {
+									setAttributes( { displayType: type } );
+								} }
 							/>
 
-							{displayType === 'single' && (
+							{ displayType === 'single' && (
 								<SelectControl
 									__nextHasNoMarginBottom
-									label={__('Select Episode', 'spotify2go')}
+									label={ __(
+										'Select Episode',
+										'pulseshare'
+									) }
 									help="Selected episode will be displayed in the frontend."
 									value={
 										currentEpisode
 											? currentEpisode.id
-											: episodesArray[0].id
+											: episodesArray[ 0 ].id
 									}
-									options={episodesArray.map((episode) => {
-										return {
-											label: episode.name,
-											value: episode.id,
-										};
-									})}
-									onChange={(id) => {
-										setAttributes({
+									options={ episodesArray.map(
+										( episode ) => {
+											return {
+												label: episode.name,
+												value: episode.id,
+											};
+										}
+									) }
+									onChange={ ( id ) => {
+										setAttributes( {
 											currentEpisode: episodesArray.find(
-												(episode) => episode.id === id
+												( episode ) => episode.id === id
 											),
-										});
-									}}
+										} );
+									} }
 								/>
-							)}
+							) }
 
-							{displayType === 'single' && (
+							{ displayType === 'single' && (
 								<ToggleControl
 									__nextHasNoMarginBottom
-									checked={isVideo ? isVideo : false}
-									help={__(
+									checked={ isVideo ? isVideo : false }
+									help={ __(
 										'Enable this option if this episode is a video.',
-										'spotify2go'
-									)}
-									label={__(
+										'pulseshare'
+									) }
+									label={ __(
 										'Is this a video episode?',
-										'spotify2go'
-									)}
-									onChange={(state) => {
-										setAttributes({ isVideo: state });
-									}}
+										'pulseshare'
+									) }
+									onChange={ ( state ) => {
+										setAttributes( { isVideo: state } );
+									} }
 								/>
-							)}
+							) }
 
 							<UnitControl
 								__next40pxDefaultSize
 								label="Height"
-								onChange={(value) => {
-									setAttributes({ height: value });
-								}}
-								units={[
+								onChange={ ( value ) => {
+									setAttributes( { height: value } );
+								} }
+								units={ [
 									{
 										a11yLabel: 'Pixels (px)',
 										label: 'px',
@@ -263,16 +271,16 @@ export default class listEmbedEdit extends Component {
 										step: 1,
 										value: '%',
 									},
-								]}
-								value={height}
+								] }
+								value={ height }
 							/>
 							<UnitControl
 								__next40pxDefaultSize
 								label="Width"
-								onChange={(value) => {
-									setAttributes({ width: value });
-								}}
-								units={[
+								onChange={ ( value ) => {
+									setAttributes( { width: value } );
+								} }
+								units={ [
 									{
 										a11yLabel: 'Pixels (px)',
 										label: 'px',
@@ -285,38 +293,39 @@ export default class listEmbedEdit extends Component {
 										step: 1,
 										value: '%',
 									},
-								]}
-								value={width}
+								] }
+								value={ width }
 							/>
 						</PanelBody>
 					</div>
 				</InspectorControls>
 
-				<div className={classes} id={blockID}>
+				<div className={ classes } id={ blockID }>
 					<div className="container">
-						<div className={'sfwe-episode'}>
-							{displayType === 'single' && !currentEpisode.id && (
-								<div className="notice notice-info alt">
-									<p>
-										<i>
-											{__(
-												'Please select an episode from the block settings.',
-												'spotify2go'
-											)}
-										</i>
-									</p>
-								</div>
-							)}
+						<div className={ 'sfwe-episode' }>
+							{ displayType === 'single' &&
+								! currentEpisode.id && (
+									<div className="notice notice-info alt">
+										<p>
+											<i>
+												{ __(
+													'Please select an episode from the block settings.',
+													'pulseshare'
+												) }
+											</i>
+										</p>
+									</div>
+								) }
 
-							{displayType === 'single' && currentEpisode.id && (
+							{ displayType === 'single' && currentEpisode.id && (
 								<iframe
-									id={'sfwe-episode-' + currentEpisode.id}
+									id={ 'sfwe-episode-' + currentEpisode.id }
 									frameBorder="0"
 									allowFullScreen=""
 									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 									loading="lazy"
-									width={width ? width : '100%'}
-									height={height ? height : '200'}
+									width={ width ? width : '100%' }
+									height={ height ? height : '200' }
 									src={
 										'https://open.spotify.com/embed/episode/' +
 										currentEpisode.id +
@@ -324,25 +333,25 @@ export default class listEmbedEdit extends Component {
 										video
 									}
 								></iframe>
-							)}
-							{displayType === 'full' && (
+							) }
+							{ displayType === 'full' && (
 								<iframe
 									id={
 										'sfwe-show-' +
-										Spotify2GoAdminVars.sfwe_options.show_id
+										PulseShareAdminVars.pulseshare_options.show_id
 									}
 									frameBorder="0"
 									allowFullScreen=""
 									allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 									loading="lazy"
-									width={width ? width : '100%'}
-									height={height ? height : '200'}
+									width={ width ? width : '100%' }
+									height={ height ? height : '200' }
 									src={
 										'https://open.spotify.com/embed/show/' +
-										Spotify2GoAdminVars.sfwe_options.show_id
+										PulseShareAdminVars.pulseshare_options.show_id
 									}
 								></iframe>
-							)}
+							) }
 						</div>
 					</div>
 				</div>

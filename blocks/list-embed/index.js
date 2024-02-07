@@ -27,7 +27,7 @@ import { listEmbed } from '../../admin/js/block-icons';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(metadata, {
+registerBlockType( metadata, {
 	/**
 	 * @see ../../admin/js/block-icons.js
 	 */
@@ -44,4 +44,4 @@ registerBlockType(metadata, {
 	 * @see ./save.js
 	 */
 	save: listEmbedSave,
-});
+} );

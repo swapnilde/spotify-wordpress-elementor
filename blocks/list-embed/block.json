@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"name": "spotify2go/list-embed",
+	"name": "pulseshare/list-embed",
 	"version": "1.0.0",
 	"title": "Podcast & Episodes",
-	"category": "spotify2go",
+	"category": "pulseshare",
 	"description": "Display a list of episodes to embed in your posts.",
-	"keywords": ["spotify", "podcast", "show", "embed"],
+	"keywords": [ "spotify", "podcast", "show", "embed" ],
 	"supports": {
 		"html": false
 	},
@@ -37,7 +37,7 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "spotify2go",
+	"textdomain": "pulseshare",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

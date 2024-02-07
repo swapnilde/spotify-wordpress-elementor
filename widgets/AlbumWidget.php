@@ -1,15 +1,15 @@
 <?php
 /**
- * Spotify2GoAlbumWidget
+ * AlbumWidget
  *
  * @link       https://swapnild.com
  * @since      1.0.0
  *
- * @package    Spotify2Go
- * @subpackage Spotify2Go/widgets
+ * @package    PulseShare
+ * @subpackage PulseShare/widgets
  */
 
-namespace Spotify2Go\Widgets;
+namespace PulseShare\Widgets;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -20,16 +20,16 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
 use Elementor\Utils;
-use Spotify2Go\includes\SGOHelper;
+use PulseShare\includes\Helper;
 
 /**
- * Spotify2GoAlbumWidget
+ * AlbumWidget
  *
  * @since      1.0.0
- * @package    Spotify2Go
- * @subpackage Spotify2Go/widgets
+ * @package    PulseShare
+ * @subpackage PulseShare/widgets
  */
-class Spotify2GoAlbumWidget extends Widget_Base {
+class AlbumWidget extends Widget_Base {
 
 	/**
 	 * Elementor Widget Name.
@@ -37,7 +37,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_name() {
-		return 'spotify-wordpress-elementor-album-widget';
+		return 'pulsesharewordpress-elementor-album-widget';
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_title() {
-		return __( 'Album & Tracks', 'spotify2go' );
+		return __( 'Album & Tracks', 'pulseshare' );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->start_controls_section(
 			'sfwe_album_content_section',
 			array(
-				'label' => __( 'Spotify Album', 'spotify2go' ),
+				'label' => __( 'Spotify Album', 'pulseshare' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -122,13 +122,13 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_album_display_type',
 			array(
-				'label'       => __( 'Display Type', 'spotify2go' ),
-				'description' => __( 'Choose whether to display a full album or a single track.', 'spotify2go' ),
+				'label'       => __( 'Display Type', 'pulseshare' ),
+				'description' => __( 'Choose whether to display a full album or a single track.', 'pulseshare' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'full',
 				'options'     => array(
-					'full'   => __( 'Full Album', 'spotify2go' ),
-					'single' => __( 'Single Track', 'spotify2go' ),
+					'full'   => __( 'Full Album', 'pulseshare' ),
+					'single' => __( 'Single Track', 'pulseshare' ),
 				),
 			)
 		);
@@ -136,11 +136,11 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_album_list',
 			array(
-				'label'       => __( 'Select Track', 'spotify2go' ),
-				'description' => __( 'Select the track you want to display.', 'spotify2go' ),
+				'label'       => __( 'Select Track', 'pulseshare' ),
+				'description' => __( 'Select the track you want to display.', 'pulseshare' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '',
-				'options'     => SGOHelper::get_spotify_show_tracks(),
+				'options'     => Helper::get_pulseshareshow_tracks(),
 				'condition'   => array(
 					'sfwe_album_display_type' => 'single',
 				),
@@ -152,7 +152,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->start_controls_section(
 			'sfwe_album_style_section',
 			array(
-				'label' => __( 'Styles', 'spotify2go' ),
+				'label' => __( 'Styles', 'pulseshare' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -160,7 +160,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_album_height',
 			array(
-				'label'      => esc_html__( 'Height', 'spotify2go' ),
+				'label'      => esc_html__( 'Height', 'pulseshare' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -184,7 +184,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_album_width',
 			array(
-				'label'      => esc_html__( 'Width', 'spotify2go' ),
+				'label'      => esc_html__( 'Width', 'pulseshare' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -216,10 +216,10 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 	 * @return void
 	 */
 	protected function render() {
-		$settings     = $this->get_settings_for_display();
-		$node_id      = $this->get_id();
-		$is_editor    = Plugin::$instance->editor->is_edit_mode();
-		$sfwe_options = get_option( 'sfwe_options' );
+		$settings           = $this->get_settings_for_display();
+		$node_id            = $this->get_id();
+		$is_editor          = Plugin::$instance->editor->is_edit_mode();
+		$pulseshare_options = get_option( 'pulseshare_options' );
 
 		$this->add_render_attribute( 'container', 'id', 'sfwe-album-' . $node_id );
 		$this->add_render_attribute( 'container', 'class', array( 'sfwe-album' ) );
@@ -237,14 +237,14 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 		<div <?php echo esc_attr( $this->get_render_attribute_string( 'container' ) ); ?>>
 			<?php if ( 'full' === $settings['sfwe_album_display_type'] ) : ?>
 				<iframe
-					id="sfwe-show-<?php echo esc_attr( $sfwe_options['sfwe_album_id'] ?? '' ); ?>"
+					id="sfwe-show-<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>"
 					frameBorder="0"
 					allowFullScreen=""
 					allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $sfwe_options['sfwe_album_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/album/<?php echo esc_attr( $pulseshare_options['pulseshare_album_id'] ?? '' ); ?>">
 				</iframe>
 			<?php endif; ?>
 
@@ -263,7 +263,7 @@ class Spotify2GoAlbumWidget extends Widget_Base {
 
 			<?php if ( $is_editor && 'single' === $settings['sfwe_album_display_type'] && empty( $settings['sfwe_album_list'] ) ) : ?>
 				<div class="sfwe-album-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
-					<?php esc_html_e( 'Please select a track from the widget settings.', 'spotify2go' ); ?>
+					<?php esc_html_e( 'Please select a track from the widget settings.', 'pulseshare' ); ?>
 				</div>
 			<?php endif; ?>
 		</div>

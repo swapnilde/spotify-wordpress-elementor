@@ -4,15 +4,15 @@
  *
  * @link       https://swapnild.com
  * @since      1.0.0
- * @package    Spotify2Go
+ * @package    PulseShare
  */
 
-namespace Spotify2Go\Admin;
+namespace PulseShare\Admin;
 
-use Spotify2Go\Classes\Spotify2GoLoader;
-use Spotify2Go\includes\SGOHelper;
-use Spotify2Go\Widgets\Spotify2GoAlbumWidget;
-use Spotify2Go\Widgets\Spotify2GoPodcastWidget;
+use PulseShare\Classes\PulseShareLoader;
+use PulseShare\includes\Helper;
+use PulseShare\Widgets\AlbumWidget;
+use PulseShare\Widgets\PodcastWidget;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * The admin-specific functionality of the plugin.
  */
-class Spotify2GoAdmin {
+class PulseShareAdmin {
 
 	/**
 	 * The ID of this plugin.
@@ -64,7 +64,7 @@ class Spotify2GoAdmin {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Spotify2GoLoader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      PulseShareLoader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -79,7 +79,7 @@ class Spotify2GoAdmin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-		$this->loader      = Spotify2GoLoader::get_instance();
+		$this->loader      = PulseShareLoader::get_instance();
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Spotify2GoAdmin {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, SPOTIFY_WORDPRESS_ELEMENTOR_URLPATH . 'assets/admin/css/spotify-wordpress-elementor-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, PULSESHARE_URLPATH . 'assets/admin/css/pulseshare-wordpress-elementor-admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Spotify2GoAdmin {
 
 		wp_enqueue_script(
 			$this->plugin_name . '-manifest',
-			SPOTIFY_WORDPRESS_ELEMENTOR_URLPATH . 'assets/manifest.js',
+			PULSESHARE_URLPATH . 'assets/manifest.js',
 			array(),
 			$this->version,
 			array(
@@ -112,7 +112,7 @@ class Spotify2GoAdmin {
 
 		wp_enqueue_script(
 			$this->plugin_name . '-vendor',
-			SPOTIFY_WORDPRESS_ELEMENTOR_URLPATH . 'assets/vendor.js',
+			PULSESHARE_URLPATH . 'assets/vendor.js',
 			array(),
 			$this->version,
 			array(
@@ -123,7 +123,7 @@ class Spotify2GoAdmin {
 
 		wp_enqueue_script(
 			$this->plugin_name,
-			SPOTIFY_WORDPRESS_ELEMENTOR_URLPATH . 'assets/admin/js/spotify-wordpress-elementor-admin.js',
+			PULSESHARE_URLPATH . 'assets/admin/js/pulseshare-wordpress-elementor-admin.js',
 			array( 'jquery' ),
 			$this->version,
 			array(
@@ -134,47 +134,47 @@ class Spotify2GoAdmin {
 
 		wp_localize_script(
 			$this->plugin_name,
-			'Spotify2GoAdminVars',
+			'PulseShareAdminVars',
 			array(
-				'home_url'     => get_home_url(),
-				'site_url'     => esc_url_raw( get_site_url() ),
-				'ajax_url'     => admin_url( 'admin-ajax.php' ),
-				'rest_url'     => esc_url_raw( get_rest_url() ),
-				'user'         => wp_get_current_user(),
-				'user_avatar'  => get_avatar_url( wp_get_current_user()->ID ),
-				'sfwe_options' => array(
-					'client_id'     => SGOHelper::check_spotify_api_keys_empty() ? '' : get_option( 'sfwe_options' )['sfwe_client_id'],
-					'client_secret' => SGOHelper::check_spotify_api_keys_empty() ? '' : get_option( 'sfwe_options' )['sfwe_client_secret'],
-					'show_id'       => get_option( 'sfwe_options' )['sfwe_show_id'],
-					'album_id'      => get_option( 'sfwe_options' )['sfwe_album_id'],
+				'home_url'           => get_home_url(),
+				'site_url'           => esc_url_raw( get_site_url() ),
+				'ajax_url'           => admin_url( 'admin-ajax.php' ),
+				'rest_url'           => esc_url_raw( get_rest_url() ),
+				'user'               => wp_get_current_user(),
+				'user_avatar'        => get_avatar_url( wp_get_current_user()->ID ),
+				'pulseshare_options' => array(
+					'client_id'     => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_id'],
+					'client_secret' => Helper::check_pulseshareapi_keys_empty() ? '' : get_option( 'pulseshare_options' )['pulseshare_client_secret'],
+					'show_id'       => get_option( 'pulseshare_options' )['pulseshare_show_id'],
+					'album_id'      => get_option( 'pulseshare_options' )['pulseshare_album_id'],
 				),
 			)
 		);
 	}
 
 	/**
-	 * Display notice if the spotify client id and secret are empty.
+	 * Display notice if the pulseshare client id and secret are empty.
 	 *
 	 * @since    1.0.0
 	 * @access   public
 	 * @return void
 	 */
-	public function spotify_api_keys_empty_notice() {
+	public function pulseshareapi_keys_empty_notice() {
 		?>
 		<div class="notice notice-error is-dismissible">
 			<p>
 				<?php
 				printf(
 					/* translators: 1: Plugin name 2: Settings page link */
-					esc_html__( '%1$sPlease set the Spotify Client ID and Client Secret in the %2$s.', 'spotify2go' ),
+					esc_html__( '%1$sPlease set the Spotify Client ID and Client Secret in the %2$s.', 'pulseshare' ),
 					sprintf(
 						'<strong>%1$s</strong>',
-						esc_html__( 'Spotify2Go: ', 'spotify2go' )
+						esc_html__( 'PulseShare: ', 'pulseshare' )
 					),
 					sprintf(
 						'<a href="%1$s">%2$s</a>',
-						esc_url( admin_url( 'admin.php?page=sfwe-options-panel' ) ),
-						esc_html__( 'settings page', 'spotify2go' )
+						esc_url( admin_url( 'admin.php?page=pulseshare-options-panel' ) ),
+						esc_html__( 'settings page', 'pulseshare' )
 					)
 				);
 				?>
@@ -192,8 +192,8 @@ class Spotify2GoAdmin {
 	 */
 	public function add_block_categories( $block_categories ) {
 		$block_categories[] = array(
-			'slug'  => 'spotify2go',
-			'title' => __( 'Spotify For Wordpress', 'spotify2go' ),
+			'slug'  => 'pulseshare',
+			'title' => __( 'Spotify For Wordpress', 'pulseshare' ),
 		);
 
 		return $block_categories;
@@ -205,9 +205,9 @@ class Spotify2GoAdmin {
 	 * @since    1.0.0
 	 */
 	public function register_block_script() {
-		if ( ! SGOHelper::check_spotify_api_keys_empty() ) {
-			register_block_type( SPOTIFY_WORDPRESS_ELEMENTOR_DIRPATH . 'assets/admin/blocks/list-embed' );
-			register_block_type( SPOTIFY_WORDPRESS_ELEMENTOR_DIRPATH . 'assets/admin/blocks/album-embed' );
+		if ( ! Helper::check_pulseshareapi_keys_empty() ) {
+			register_block_type( PULSESHARE_DIRPATH . 'assets/admin/blocks/list-embed' );
+			register_block_type( PULSESHARE_DIRPATH . 'assets/admin/blocks/album-embed' );
 		}
 	}
 
@@ -231,14 +231,14 @@ class Spotify2GoAdmin {
 				<?php
 					printf(
 					/* translators: 1: Plugin name 2: Elementor */
-						esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'spotify2go' ),
+						esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'pulseshare' ),
 						sprintf(
 							'<strong>%1$s</strong>',
-							esc_html__( 'Spotify2Go', 'spotify2go' )
+							esc_html__( 'PulseShare', 'pulseshare' )
 						),
 						sprintf(
 							'<strong>%1$s</strong>',
-							esc_html__( 'Elementor', 'spotify2go' )
+							esc_html__( 'Elementor', 'pulseshare' )
 						)
 					);
 				?>
@@ -263,9 +263,9 @@ class Spotify2GoAdmin {
 
 		$message = sprintf(
 		/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'spotify2go' ),
-			'<strong>' . esc_html__( 'Spotify2Go', 'spotify2go' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'spotify2go' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'pulseshare' ),
+			'<strong>' . esc_html__( 'PulseShare', 'pulseshare' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'pulseshare' ) . '</strong>',
 			self::MINIMUM_ELEMENTOR_VERSION
 		);
 
@@ -288,9 +288,9 @@ class Spotify2GoAdmin {
 
 		$message = sprintf(
 		/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'spotify2go' ),
-			'<strong>' . esc_html__( 'Spotify2Go', 'spotify2go' ) . '</strong>',
-			'<strong>' . esc_html__( 'PHP', 'spotify2go' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'pulseshare' ),
+			'<strong>' . esc_html__( 'PulseShare', 'pulseshare' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'pulseshare' ) . '</strong>',
 			self::MINIMUM_PHP_VERSION
 		);
 
@@ -319,9 +319,9 @@ class Spotify2GoAdmin {
 	 */
 	public function register_widgets( $widgets_manager ) {
 
-		if ( ! SGOHelper::check_spotify_api_keys_empty() || did_action( 'elementor/loaded' ) ) {
-			$widgets_manager->register( new Spotify2GoPodcastWidget() );
-			$widgets_manager->register( new Spotify2GoAlbumWidget() );
+		if ( ! Helper::check_pulseshareapi_keys_empty() || did_action( 'elementor/loaded' ) ) {
+			$widgets_manager->register( new PodcastWidget() );
+			$widgets_manager->register( new AlbumWidget() );
 		}
 	}
 }

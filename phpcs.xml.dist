@@ -2,7 +2,7 @@
 <ruleset>
 
 	<file>.</file>
-	<file>spotify2go.php</file>
+	<file>pulseshare.php</file>
 
 	<!-- Show progress and sniff codes in all reports. -->
 	<arg value="s"/>
