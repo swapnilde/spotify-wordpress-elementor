@@ -5,32 +5,32 @@
  * @link       https://swapnild.com
  * @since      1.0.0
  *
- * @package    Spotify2Go
- * @subpackage Spotify2Go/includes
+ * @package    PulseShare
+ * @subpackage PulseShare/includes
  */
 
-namespace Spotify2Go\Classes;
+namespace PulseShare\Classes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-use Spotify2Go\Classes\Spotify2GoLoader;
-use Spotify2Go\Classes\Spotify2GoI18n;
-use Spotify2Go\Admin\Spotify2GoAdmin;
-use Spotify2Go\Includes\Options\SGOptionsPanel;
-use Spotify2Go\includes\SGOHelper;
+use PulseShare\Classes\PulseShareLoader;
+use PulseShare\Classes\PulseShareI18n;
+use PulseShare\Admin\PulseShareAdmin;
+use PulseShare\Includes\Options\OptionsPanel;
+use PulseShare\includes\Helper;
 
 /**
  * The core plugin class.
  *
  * @since      1.0.0
- * @package    Spotify2Go
- * @subpackage Spotify2Go/includes
+ * @package    PulseShare
+ * @subpackage PulseShare/includes
  * @author     Swapnil Deshpande <hello@swapnild.com>
  */
-class Spotify2Go {
+class PulseShare {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -38,7 +38,7 @@ class Spotify2Go {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Spotify2GoLoader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      PulseShareLoader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -77,11 +77,11 @@ class Spotify2Go {
 	const MINIMUM_PHP_VERSION = '7.3';
 
 	/**
-	 * The current instance of the Spotify2Go class.
+	 * The current instance of the PulseShare class.
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @var object $instance The current instance of the Spotify2Go class.
+	 * @var object $instance The current instance of the PulseShare class.
 	 */
 	private static $instance;
 
@@ -109,12 +109,12 @@ class Spotify2Go {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'SPOTIFY_WORDPRESS_ELEMENTOR_VERSION' ) ) {
-			$this->version = SPOTIFY_WORDPRESS_ELEMENTOR_VERSION;
+		if ( defined( 'PULSESHARE_VERSION' ) ) {
+			$this->version = PULSESHARE_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'spotify2go';
+		$this->plugin_name = 'pulseshare';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -135,18 +135,18 @@ class Spotify2Go {
 	 * @throws \Exception The exception class.
 	 */
 	public function __wakeup() {
-		throw new \Exception( 'Cannot unserialize singleton Spotify2Go' );
+		throw new \Exception( 'Cannot unserialize singleton PulseShare' );
 	}
 
 	/**
-	 * This is the static method that controls the access to the Spotify2Go class instance.
+	 * This is the static method that controls the access to the PulseShare class instance.
 	 *
-	 * @return Spotify2Go
+	 * @return PulseShare
 	 * @since 1.0.0
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new Spotify2Go();
+			self::$instance = new PulseShare();
 		}
 		return self::$instance;
 	}
@@ -159,8 +159,8 @@ class Spotify2Go {
 	 */
 	private function load_dependencies() {
 
-		$this->loader       = Spotify2GoLoader::get_instance();
-		$this->plugin_admin = new Spotify2GoAdmin( $this->get_plugin_name(), $this->get_version() );
+		$this->loader       = PulseShareLoader::get_instance();
+		$this->plugin_admin = new PulseShareAdmin( $this->get_plugin_name(), $this->get_version() );
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Spotify2Go {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Spotify2GoI18n();
+		$plugin_i18n = new PulseShareI18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -188,11 +188,11 @@ class Spotify2Go {
 		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts' );
 
-		$options_panel = SGOHelper::get_options_page();
-		new SGOptionsPanel( $options_panel['args'], $options_panel['settings'] );
+		$options_panel = Helper::get_options_page();
+		new OptionsPanel( $options_panel['args'], $options_panel['settings'] );
 
-		if ( SGOHelper::check_spotify_api_keys_empty() ) {
-			$this->loader->add_action( 'admin_notices', $this->plugin_admin, 'spotify_api_keys_empty_notice' );
+		if ( Helper::check_pulseshareapi_keys_empty() ) {
+			$this->loader->add_action( 'admin_notices', $this->plugin_admin, 'pulseshareapi_keys_empty_notice' );
 		}
 
 		// Add a custom category for our blocks.
@@ -230,7 +230,7 @@ class Spotify2Go {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @return    Spotify2GoLoader    Orchestrates the hooks of the plugin.
+	 * @return    PulseShareLoader    Orchestrates the hooks of the plugin.
 	 * @since     1.0.0
 	 */
 	public function get_loader() {

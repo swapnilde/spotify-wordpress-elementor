@@ -1,13 +1,13 @@
 <?php
 /**
- * Class SGOptionsPanel
+ * Class OptionsPanel
  *
  * @link https://swapnild.com
  * @since 1.0.0
- * @package Spotify2Go
+ * @package PulseShare
  */
 
-namespace Spotify2Go\Includes\Options;
+namespace PulseShare\Includes\Options;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -15,11 +15,11 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Bootstrap class for the Spotify2Go Options pages.
+ * Bootstrap class for the PulseShare Options pages.
  *
  * @since 1.0.0
  */
-class SGOptionsPanel {
+class OptionsPanel {
 
 	/**
 	 * Options panel arguments.
@@ -104,7 +104,7 @@ class SGOptionsPanel {
 	public function __construct( array $args, array $settings ) {
 		$this->args              = $args;
 		$this->settings          = $settings;
-		$this->title             = $this->args['title'] ?? esc_html__( 'Options', 'spotify2go' );
+		$this->title             = $this->args['title'] ?? esc_html__( 'Options', 'pulseshare' );
 		$this->slug              = $this->args['slug'] ?? sanitize_key( $this->title );
 		$this->option_name       = $this->args['option_name'] ?? sanitize_key( $this->title );
 		$this->option_group_name = $this->option_name . '_group';
@@ -259,7 +259,7 @@ class SGOptionsPanel {
 			add_settings_error(
 				$this->option_name . '_mesages',
 				$this->option_name . '_message',
-				esc_html__( 'Settings Saved', 'spotify2go' ),
+				esc_html__( 'Settings Saved', 'pulseshare' ),
 				'updated'
 			);
 		}

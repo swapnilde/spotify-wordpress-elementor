@@ -4,7 +4,7 @@
  *
  * @link       https://swapnild.com
  * @since      1.0.0
- * @package    Spotify2Go
+ * @package    PulseShare
  */
 
 // If this file is called directly, abort.
@@ -12,17 +12,17 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-spl_autoload_register( 'sfwe_namespace_autoload' );
+spl_autoload_register( 'pulseshare_namespace_autoload' );
 
 /**
  * Callback for autoloader.
  *
  * @param string $class_name The class name.
  */
-function sfwe_namespace_autoload( $class_name ) {
+function pulseshare_namespace_autoload( $class_name ) {
 
 	// If the specified $class_name does not include our namespace, duck out.
-	if ( ! str_contains( $class_name, 'Spotify2Go' ) ) {
+	if ( ! str_contains( $class_name, 'PulseShare' ) ) {
 		return;
 	}
 

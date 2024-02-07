@@ -1,12 +1,12 @@
-# Copyright (C) 2023 Spotify2Go
-# This file is distributed under the same license as the Spotify2Go package.
+# Copyright (C) 2024 PulseShare
+# This file is distributed under the same license as the PulseShare package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Spotify2Go\n"
+"Project-Id-Version: PulseShare\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-10 17:00+0000\n"
+"POT-Creation-Date: 2024-02-06 12:08+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -15,169 +15,169 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. translators: 1: Plugin name 2: Settings page link
-#: admin/Spotify2GoAdmin.php:169
+#: admin/PulseShareAdmin.php:169
 msgid "%1$sPlease set the Spotify Client ID and Client Secret in the %2$s."
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:172
-msgid "Spotify2Go: "
+#: admin/PulseShareAdmin.php:172
+msgid "PulseShare: "
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:177
+#: admin/PulseShareAdmin.php:177
 msgid "settings page"
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:196
+#: admin/PulseShareAdmin.php:196
 msgid "Spotify For Wordpress"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor
-#: admin/Spotify2GoAdmin.php:234
+#: admin/PulseShareAdmin.php:234
 msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:237, admin/Spotify2GoAdmin.php:267, admin/Spotify2GoAdmin.php:292
-msgid "Spotify2Go"
+#: admin/PulseShareAdmin.php:237, admin/PulseShareAdmin.php:267, admin/PulseShareAdmin.php:292
+msgid "PulseShare"
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:241, admin/Spotify2GoAdmin.php:268
+#: admin/PulseShareAdmin.php:241, admin/PulseShareAdmin.php:268
 msgid "Elementor"
 msgstr ""
 
 #. translators: 1: Plugin name 2: Elementor 3: Required Elementor version
 #. translators: 1: Plugin name 2: PHP 3: Required PHP version
-#: admin/Spotify2GoAdmin.php:266, admin/Spotify2GoAdmin.php:291
+#: admin/PulseShareAdmin.php:266, admin/PulseShareAdmin.php:291
 msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
 msgstr ""
 
-#: admin/Spotify2GoAdmin.php:293
+#: admin/PulseShareAdmin.php:293
 msgid "PHP"
 msgstr ""
 
-#: includes/SGOHelper.php:141
+#: includes/Helper.php:141
 msgid "API Keys"
 msgstr ""
 
-#: includes/SGOHelper.php:142
+#: includes/Helper.php:142
 msgid "Integrations"
 msgstr ""
 
-#: includes/SGOHelper.php:152
+#: includes/Helper.php:152
 msgid "Client ID"
 msgstr ""
 
-#: includes/SGOHelper.php:158
+#: includes/Helper.php:158
 msgid "Client Secret"
 msgstr ""
 
-#: includes/SGOHelper.php:165
+#: includes/Helper.php:165
 msgid "Podcast Show ID"
 msgstr ""
 
-#: includes/SGOHelper.php:171
+#: includes/Helper.php:171
 msgid "Album ID"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:49
+#: widgets/AlbumWidget.php:49
 msgid "Album & Tracks"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:117
+#: widgets/AlbumWidget.php:117
 msgid "Spotify Album"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:125, widgets/Spotify2GoPodcastWidget.php:125
+#: widgets/AlbumWidget.php:125, widgets/PodcastWidget.php:125
 msgid "Display Type"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:126
+#: widgets/AlbumWidget.php:126
 msgid "Choose whether to display a full album or a single track."
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:130
+#: widgets/AlbumWidget.php:130
 msgid "Full Album"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:131
+#: widgets/AlbumWidget.php:131
 msgid "Single Track"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:139
+#: widgets/AlbumWidget.php:139
 msgid "Select Track"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:140
+#: widgets/AlbumWidget.php:140
 msgid "Select the track you want to display."
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:155, widgets/Spotify2GoPodcastWidget.php:171
+#: widgets/AlbumWidget.php:155, widgets/PodcastWidget.php:171
 msgid "Styles"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:163, widgets/Spotify2GoPodcastWidget.php:179
+#: widgets/AlbumWidget.php:163, widgets/PodcastWidget.php:179
 msgid "Height"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:187, widgets/Spotify2GoPodcastWidget.php:203
+#: widgets/AlbumWidget.php:187, widgets/PodcastWidget.php:203
 msgid "Width"
 msgstr ""
 
-#: widgets/Spotify2GoAlbumWidget.php:266
+#: widgets/AlbumWidget.php:266
 msgid "Please select a track from the widget settings."
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:49
+#: widgets/PodcastWidget.php:49
 msgid "Podcast & Episodes"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:117
+#: widgets/PodcastWidget.php:117
 msgid "Content"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:126
+#: widgets/PodcastWidget.php:126
 msgid "Choose whether to display a full show or a single episode."
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:130
+#: widgets/PodcastWidget.php:130
 msgid "Full Show"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:131
+#: widgets/PodcastWidget.php:131
 msgid "Single Episode"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:139
+#: widgets/PodcastWidget.php:139
 msgid "Select Podcast"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:140
+#: widgets/PodcastWidget.php:140
 msgid "Select the podcast you want to display."
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:153
+#: widgets/PodcastWidget.php:153
 msgid "Is this a video episode?"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:154
+#: widgets/PodcastWidget.php:154
 msgid "Enable this option if this episode is a video."
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:156
+#: widgets/PodcastWidget.php:156
 msgid "Video"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:157
+#: widgets/PodcastWidget.php:157
 msgid "Audio"
 msgstr ""
 
-#: widgets/Spotify2GoPodcastWidget.php:283
+#: widgets/PodcastWidget.php:283
 msgid "Please select an episode from the widget settings"
 msgstr ""
 
-#: includes/options/SGOptionsPanel.php:107
+#: includes/options/OptionsPanel.php:107
 msgid "Options"
 msgstr ""
 
-#: includes/options/SGOptionsPanel.php:262
+#: includes/options/OptionsPanel.php:262
 msgid "Settings Saved"
 msgstr ""

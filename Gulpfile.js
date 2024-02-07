@@ -56,7 +56,7 @@ gulp.task(
 
 gulp.task(
 	'admin-js-lint',
-	function(cb) {
+	function (cb) {
 		return gulp.src( 'admin/js/*.js' )
 		.pipe(
 			eslint(
@@ -80,7 +80,7 @@ gulp.task(
 
 gulp.task(
 	'public-js-lint',
-	function(cb) {
+	function (cb) {
 		return gulp.src( 'frontend/js/*.js' )
 		.pipe(
 			eslint(
@@ -109,25 +109,25 @@ gulp.task(
 		.pipe(
 			wpPot(
 				{
-					domain: 'spotify2go',
-					package: 'Spotify2Go'
+					domain: 'pulseshare',
+					package: 'PulseShare'
 				}
 			)
 		)
-		.pipe( gulp.dest( 'languages/spotify2go.pot' ) );
+		.pipe( gulp.dest( 'languages/pulseshare.pot' ) );
 		cb();
 	}
 );
 
 gulp.task(
 	'checktextdomain',
-	function(cb) {
+	function (cb) {
 		return gulp
 		.src( '**/*.php' )
 		.pipe(
 			checktextdomain(
 				{
-					text_domain: 'spotify2go', // Specify allowed domain(s).
+					text_domain: 'pulseshare', // Specify allowed domain(s).
 					keywords: [ // List keyword specifications.
 					'__:1,2d',
 					'_e:1,2d',
@@ -209,8 +209,8 @@ gulp.task(
 
 gulp.task(
 	'bump',
-	function(cb){
-		var pkg    = gulp.src( 'package.json' );
+	function (cb) {
+		var pkg = gulp.src( 'package.json' );
 		return gulp.src( '*' )
 		.pipe(
 			prompt.prompt(
@@ -220,11 +220,11 @@ gulp.task(
 					message: 'What type of bump would you like to do?',
 					choices: ['major', 'minor', 'patch', 'prerelease' ]
 				},
-				function(res){
+				function (res) {
 					var bumpType = res.bump[0];
 					pkg.pipe( bump( {type: bumpType} ) )
 					.pipe( gulp.dest( './' ) )
-					.pipe(wait(10000));
+					.pipe( wait( 10000 ) );
 				}
 			)
 		);
@@ -235,11 +235,11 @@ gulp.task(
 gulp.task(
 	'plugin-version',
 	function (cb) {
-		return gulp.src( 'spotify2go.php' )
+		return gulp.src( 'pulseshare.php' )
 		.pipe( replace( /Version: \d{1,2}\.\d{1,2}\.\d{1,2}/g, 'Version: ' + getPkgInfo().version ) )
-		.pipe( replace( /SPOTIFY_WORDPRESS_ELEMENTOR_VERSION', '.*?'/g, 'SPOTIFY_WORDPRESS_ELEMENTOR_VERSION\', \'' + getPkgInfo().version + '\'' ) )
+		.pipe( replace( /PULSESHARE_VERSION', '.*?'/g, 'PULSESHARE_VERSION\', \'' + getPkgInfo().version + '\'' ) )
 		.pipe( gulp.dest( './' ) )
-		.pipe(wait(10000));
+		.pipe( wait( 10000 ) );
 		cb();
 	}
 );
@@ -258,10 +258,14 @@ gulp.task(
 	'readme',
 	function (cb) {
 		return gulp.src( 'readme.txt' )
-		.pipe( readme( { 
-			details: true,
-			screenshot_ext: ['jpg', 'jpg', 'png'],
-		} ) )
+		.pipe(
+			readme(
+				{
+					details: true,
+					screenshot_ext: ['jpg', 'jpg', 'png'],
+				}
+			)
+		)
 		.pipe( gulp.dest( './' ) );
 		cb();
 	}

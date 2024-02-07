@@ -1,7 +1,7 @@
 {
-  "name": "spotify2go",
+  "name": "pulseshare",
   "version": "1.0.0",
-  "description": "Spotify2Go help you share interactive content from Spotify on your website. Embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.",
+  "description": "PulseShare help you share interactive content from Spotify on your website. Embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.",
   "main": "index.js",
   "scripts": {
     "blocks:start": "wp-scripts start --webpack-src-dir=blocks --output-path=assets/admin/blocks",
@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swapnilde/spotify-wordpress-elementor.git"
+    "url": "git+https://github.com/swapnilde/pulseshare.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/swapnilde/spotify-wordpress-elementor/issues"
+    "url": "https://github.com/swapnilde/pulseshare/issues"
   },
-  "homepage": "https://github.com/swapnilde/spotify-wordpress-elementor#readme",
+  "homepage": "https://github.com/swapnilde/pulseshare#readme",
   "browserslist": [
     "> 0.25%, last 2 versions, Firefox ESR, not dead, not IE 11"
   ],

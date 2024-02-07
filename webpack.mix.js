@@ -17,6 +17,6 @@ mix.autoload({
 
 mix.extract('assets/vendor.js');
 
-mix.js('admin/js/spotify-wordpress-elementor-admin.js', 'assets/admin/js');
+mix.js('admin/js/pulseshare-wordpress-elementor-admin.js', 'assets/admin/js');
 
-mix.postCss('admin/css/spotify-wordpress-elementor-admin.css', 'assets/admin/css');
+mix.postCss('admin/css/pulseshare-wordpress-elementor-admin.css', 'assets/admin/css');

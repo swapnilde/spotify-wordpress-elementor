@@ -21,7 +21,7 @@
  * @link       https://swapnild.com
  * @since      1.0.0
  *
- * @package    Spotify2Go
+ * @package    PulseShare
  */
 
 // If uninstall not called from WordPress, then exit.

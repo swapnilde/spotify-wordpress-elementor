@@ -1,15 +1,15 @@
 <?php
 /**
- * Spotify2GoPodcastWidget
+ * PodcastWidget
  *
  * @link       https://swapnild.com
  * @since      1.0.0
  *
- * @package    Spotify2Go
- * @subpackage Spotify2Go/widgets
+ * @package    PulseShare
+ * @subpackage PulseShare/widgets
  */
 
-namespace Spotify2Go\Widgets;
+namespace PulseShare\Widgets;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -20,16 +20,16 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Plugin;
 use Elementor\Utils;
-use Spotify2Go\includes\SGOHelper;
+use PulseShare\includes\Helper;
 
 /**
- * Spotify2GoPodcastWidget
+ * PodcastWidget
  *
  * @since      1.0.0
- * @package    Spotify2Go
- * @subpackage Spotify2Go/widgets
+ * @package    PulseShare
+ * @subpackage PulseShare/widgets
  */
-class Spotify2GoPodcastWidget extends Widget_Base {
+class PodcastWidget extends Widget_Base {
 
 	/**
 	 * Elementor Widget Name.
@@ -37,7 +37,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_name() {
-		return 'spotify-wordpress-elementor-podcast-widget';
+		return 'pulsesharewordpress-elementor-podcast-widget';
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 	 * @inheritDoc
 	 */
 	public function get_title() {
-		return __( 'Podcast & Episodes', 'spotify2go' );
+		return __( 'Podcast & Episodes', 'pulseshare' );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->start_controls_section(
 			'sfwe_podcast_content_section',
 			array(
-				'label' => __( 'Content', 'spotify2go' ),
+				'label' => __( 'Content', 'pulseshare' ),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -122,13 +122,13 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_podcast_display_type',
 			array(
-				'label'       => __( 'Display Type', 'spotify2go' ),
-				'description' => __( 'Choose whether to display a full show or a single episode.', 'spotify2go' ),
+				'label'       => __( 'Display Type', 'pulseshare' ),
+				'description' => __( 'Choose whether to display a full show or a single episode.', 'pulseshare' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => 'full',
 				'options'     => array(
-					'full'   => __( 'Full Show', 'spotify2go' ),
-					'single' => __( 'Single Episode', 'spotify2go' ),
+					'full'   => __( 'Full Show', 'pulseshare' ),
+					'single' => __( 'Single Episode', 'pulseshare' ),
 				),
 			)
 		);
@@ -136,11 +136,11 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_podcast_list',
 			array(
-				'label'       => __( 'Select Podcast', 'spotify2go' ),
-				'description' => __( 'Select the podcast you want to display.', 'spotify2go' ),
+				'label'       => __( 'Select Podcast', 'pulseshare' ),
+				'description' => __( 'Select the podcast you want to display.', 'pulseshare' ),
 				'type'        => Controls_Manager::SELECT,
 				'default'     => '',
-				'options'     => SGOHelper::get_spotify_all_episodes(),
+				'options'     => Helper::get_pulseshareall_episodes(),
 				'condition'   => array(
 					'sfwe_podcast_display_type' => 'single',
 				),
@@ -150,11 +150,11 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_podcast_video',
 			array(
-				'label'        => __( 'Is this a video episode?', 'spotify2go' ),
-				'description'  => __( 'Enable this option if this episode is a video.', 'spotify2go' ),
+				'label'        => __( 'Is this a video episode?', 'pulseshare' ),
+				'description'  => __( 'Enable this option if this episode is a video.', 'pulseshare' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Video', 'spotify2go' ),
-				'label_off'    => __( 'Audio', 'spotify2go' ),
+				'label_on'     => __( 'Video', 'pulseshare' ),
+				'label_off'    => __( 'Audio', 'pulseshare' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 				'condition'    => array(
@@ -168,7 +168,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->start_controls_section(
 			'sfwe_podcast_style_section',
 			array(
-				'label' => __( 'Styles', 'spotify2go' ),
+				'label' => __( 'Styles', 'pulseshare' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -176,7 +176,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_podcast_height',
 			array(
-				'label'      => esc_html__( 'Height', 'spotify2go' ),
+				'label'      => esc_html__( 'Height', 'pulseshare' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -200,7 +200,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		$this->add_control(
 			'sfwe_podcast_width',
 			array(
-				'label'      => esc_html__( 'Width', 'spotify2go' ),
+				'label'      => esc_html__( 'Width', 'pulseshare' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -232,10 +232,10 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 	 * @return void
 	 */
 	protected function render() {
-		$settings     = $this->get_settings_for_display();
-		$node_id      = $this->get_id();
-		$is_editor    = Plugin::$instance->editor->is_edit_mode();
-		$sfwe_options = get_option( 'sfwe_options' );
+		$settings           = $this->get_settings_for_display();
+		$node_id            = $this->get_id();
+		$is_editor          = Plugin::$instance->editor->is_edit_mode();
+		$pulseshare_options = get_option( 'pulseshare_options' );
 
 		$this->add_render_attribute( 'container', 'id', 'sfwe-podcast-' . $node_id );
 		$this->add_render_attribute( 'container', 'class', array( 'sfwe-podcast' ) );
@@ -254,14 +254,14 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 		<div <?php echo esc_attr( $this->get_render_attribute_string( 'container' ) ); ?>>
 			<?php if ( 'full' === $settings['sfwe_podcast_display_type'] ) : ?>
 				<iframe
-					id="sfwe-show-<?php echo esc_attr( $sfwe_options['sfwe_show_id'] ?? '' ); ?>"
+					id="sfwe-show-<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>"
 					frameBorder="0"
 					allowFullScreen=""
 					allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 					loading="lazy"
 					width="<?php echo esc_attr( $width ); ?>"
 					height="<?php echo esc_attr( $height ); ?>"
-					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $sfwe_options['sfwe_show_id'] ?? '' ); ?>">
+					src="https://open.spotify.com/embed/show/<?php echo esc_attr( $pulseshare_options['pulseshare_show_id'] ?? '' ); ?>">
 				</iframe>
 			<?php endif; ?>
 
@@ -280,7 +280,7 @@ class Spotify2GoPodcastWidget extends Widget_Base {
 
 			<?php if ( $is_editor && 'single' === $settings['sfwe_podcast_display_type'] && empty( $settings['sfwe_podcast_list'] ) ) : ?>
 				<div class="sfwe-podcast-editor-placeholder elementor-panel-alert elementor-panel-alert-info">
-					<?php esc_html_e( 'Please select an episode from the widget settings', 'spotify2go' ); ?>
+					<?php esc_html_e( 'Please select an episode from the widget settings', 'pulseshare' ); ?>
 				</div>
 			<?php endif; ?>
 		</div>

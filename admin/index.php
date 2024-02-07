@@ -2,7 +2,7 @@
 /**
  * Index file
  *
- * @package Spotify2Go
+ * @package PulseShare
  */
 
 /* Silence is golden, and we agree. */

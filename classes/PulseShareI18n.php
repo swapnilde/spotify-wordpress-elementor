@@ -4,10 +4,10 @@
  *
  * @link       https://swapnild.com
  * @since      1.0.0
- * @package    Spotify2Go
+ * @package    PulseShare
  */
 
-namespace Spotify2Go\Classes;
+namespace PulseShare\Classes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Define the internationalization functionality.
  */
-class Spotify2GoI18n {
+class PulseShareI18n {
 
 
 	/**
@@ -28,7 +28,7 @@ class Spotify2GoI18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'spotify2go',
+			'pulseshare',
 			false,
 			dirname( plugin_basename( __FILE__ ), 2 ) . '/languages/'
 		);
