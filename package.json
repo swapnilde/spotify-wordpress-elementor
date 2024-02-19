@@ -18,7 +18,8 @@
     "bumpup": "gulp bumpup",
     "readme": "gulp readme",
     "build": "npm run blocks:build && npm run prod && npm run domain && npm run pot && npm run readme",
-    "release": "npm run build && npm run zip"
+    "release": "npm run build && npm run zip",
+    "deploy": "npm run build && gulp dist"
   },
   "repository": {
     "type": "git",
