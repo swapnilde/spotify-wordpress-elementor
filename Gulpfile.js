@@ -159,12 +159,47 @@ gulp.task(
 		(async() => {
 			// set 'dryRun' to true to see which file will be deleted.
 			const deletedFilePaths = await del( ['*.zip'], {dryRun: false} );
-			/* const deletedDirectoryPaths = await del(['temp', 'public']); */
-
+			const deletedDirectoryPaths = await del( ['build'], {dryRun: false} );
 			console.log( 'Deleted files:\n', deletedFilePaths.join( '\n' ) );
-			/* console.log('\n\n');
-			// console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n')); */
+			console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'));
 		})();
+		cb();
+	}
+);
+
+gulp.task(
+	'dist',
+	function (cb) {
+		return gulp.src(
+			[
+				"**/*",
+				"!node_modules{,/**}",
+				"!.eslintrc",
+				"!.stylelintrc",
+				"!Gulpfile.js",
+				"!.gitignore",
+				"!gulpfile.babel.js",
+				"!package.json",
+				"!package-lock.json",
+				"!composer.json",
+				"!composer.lock",
+				"!vendor{,/**}",
+				"!phpcs.xml.dist",
+				"!psalm.xml",
+				"!*.zip",
+				"!webpack.mix.js",
+				"!admin/js{,/**}",
+				"!frontend/js{,/**}",
+				"!admin/css{,/**}",
+				"!frontend/css{,/**}",
+				"!**/*.LICENSE.txt",
+				"!mix-manifest.json",
+				"!app{,/**}",
+				"!tailwind.config.js",
+				"!blocks{,/**}",
+			]
+		)
+        .pipe( gulp.dest( './build' ) );
 		cb();
 	}
 );
