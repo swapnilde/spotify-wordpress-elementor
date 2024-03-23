@@ -29,7 +29,5 @@ class PulseShareActivator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
 	}
-
 }
