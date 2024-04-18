@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@wordpress/hooks": "^3.11.0",
-    "@wordpress/i18n": "^4.11.0",
+    "@wordpress/i18n": "^4.55.0",
     "axios": "^1.6.7",
     "jquery": "^3.6.0"
   }
