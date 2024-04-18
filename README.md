@@ -15,6 +15,13 @@ Share interactive content from Spotify on your website seamlessly without any em
 
 PulseShare provides wordpress blocks and elementor widgets to embed Spotify content on your website. You can embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.
 
+### How to set up the plugin:- ###
+
+1. First you need to create a free Spotify Developer Account to get the Client ID and Client Secret. You can create a Spotify Developer Account here - https://developer.spotify.com/dashboard/login
+2. Go to https://developer.spotify.com/dashboard/applications and Click on Create an app. Fill in the details and click on Create/Save button. Click on the Settings button in top. Copy the Client ID and Client Secret and paste it in the PulseShare settings page. Click on Save Settings button.
+3. If you and to integrate albums then Open Spotify and go to the album you want to embed. Now copy the id from the url in the address bar: e.g. If the url is like this - https://open.spotify.com/album/0sNOF9WDwdfwdcDfdPD3Baj then the id is - `0sNOF9WDwdfwdcDfdPD3Baj`. Now copy and paste the id in the PulseShare settings page. Click on Save Settings button.
+4. If you and to integrate podcast Open Spotify and go to the podcast you want to embed. Now copy the id from the url in the address bar: e.g. If the url is like this - https://open.spotify.com/show/0s54Nhd4345F9WDwdfwdcDfd then the id is - `0s54Nhd4345F9WDwdfwdcDfd`. Now copy and paste the id in the PulseShare settings page. Click on Save Settings button.
+
 ## Installation ##
 
 1. Upload the plugin files to the `/wp-content/plugins/pulseshare` directory, or install the plugin through the WordPress plugins screen directly.
