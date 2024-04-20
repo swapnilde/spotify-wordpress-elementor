@@ -10,7 +10,7 @@
  * Plugin Name:       PulseShare
  * Plugin URI:        https://swapnild.com
  * Description:       PulseShare help you share interactive content from Spotify on your website. Embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Swapnil Deshpande
  * Author URI:        https://swapnild.com/
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'PULSESHARE_VERSION', '1.0.0' );
+define( 'PULSESHARE_VERSION', '1.0.1' );
 define( 'PULSESHARE_DIRPATH', plugin_dir_path( __FILE__ ) );
 define( 'PULSESHARE_URLPATH', plugin_dir_url( __FILE__ ) );
 

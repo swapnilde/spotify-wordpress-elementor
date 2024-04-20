@@ -3,8 +3,8 @@
 **Donate link:** https://paypal.me/SwapnilDeshpandeIN  
 **Tags:** spotify, podcast, album, embed, audio, video player, wordpress, elementor  
 **Requires at least:** 4.4  
-**Tested up to:** 6.4  
-**Stable tag:** 1.0.0  
+**Tested up to:** 6.5.2  
+**Stable tag:** 1.0.1  
 **Requires PHP:** 7.2  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
@@ -14,6 +14,22 @@ Share interactive content from Spotify on your website seamlessly without any em
 ## Description ##
 
 PulseShare provides wordpress blocks and elementor widgets to embed Spotify content on your website. You can embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.
+
+### How to set up the plugin:- ###
+
+1. First you need to create a free Spotify Developer Account to get the Client ID and Client Secret. You can create a Spotify Developer Account here - https://developer.spotify.com/dashboard/login
+2. Go to https://developer.spotify.com/dashboard/applications and Click on Create an app. Fill in the details and click on Create/Save button. Click on the Settings button in top. Copy the Client ID and Client Secret and paste it in the PulseShare settings page. Click on Save Settings button.
+3. If you and to integrate albums then Open Spotify and go to the album you want to embed. Now copy the id from the url in the address bar: e.g. If the url is like this - https://open.spotify.com/album/0sNOF9WDwdfwdcDfdPD3Baj then the id is - `0sNOF9WDwdfwdcDfdPD3Baj`. Now copy and paste the id in the PulseShare settings page. Click on Save Settings button.
+4. If you and to integrate podcast Open Spotify and go to the podcast you want to embed. Now copy the id from the url in the address bar: e.g. If the url is like this - https://open.spotify.com/show/0s54Nhd4345F9WDwdfwdcDfd then the id is - `0s54Nhd4345F9WDwdfwdcDfd`. Now copy and paste the id in the PulseShare settings page. Click on Save Settings button.
+
+### NEED SUPPORT ###
+Need help with something? Have an issue to report? Visit [Plugin’s Forum](https://wordpress.org/plugins/pulseshare/ "Plugin’s Forum").
+
+OR
+
+Get in touch with us on [EMAIL](mailto:pulseshare@swapnild.com)
+
+Made with love by [Swapnil Deshpande](https://swapnild.com "Swapnil Deshpande")!
 
 ## Installation ##
 
@@ -67,6 +83,10 @@ Yes, you need to create a Spotify Developer Account to get the Client ID and Cli
 
 
 ## Changelog ##
+
+### 1.0.1 ###
+* Improvement: Compatibility with latest WordPress version.
+* Improvement: Compatibility with latest Elementor version.
 
 ### 1.0.0 ###
 * Initial release

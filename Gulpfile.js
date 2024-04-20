@@ -271,7 +271,7 @@ gulp.task(
 	'plugin-version',
 	function (cb) {
 		return gulp.src( 'pulseshare.php' )
-		.pipe( replace( /Version: \d{1,2}\.\d{1,2}\.\d{1,2}/g, 'Version: ' + getPkgInfo().version ) )
+		.pipe( replace( /Version:\s+([0-9]+(\.[0-9]+)+)/g, 'Version:           ' + getPkgInfo().version ) )
 		.pipe( replace( /PULSESHARE_VERSION', '.*?'/g, 'PULSESHARE_VERSION\', \'' + getPkgInfo().version + '\'' ) )
 		.pipe( gulp.dest( './' ) )
 		.pipe( wait( 10000 ) );

@@ -16,7 +16,7 @@ jobs:
             if [[ ${{ github.base_ref }} == master || ${{ github.base_ref }} == release-candidate || ${{ github.base_ref }} == next-release || ${{ github.base_ref }} == develop ]]; then
               echo ::set-output name=match::true
             fi
-        - uses: actions/checkout@v2
+        - uses: actions/checkout@v4
           if: steps.check_branch.outputs.match == 'true'
           with:
             repo-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "pulseshare",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PulseShare help you share interactive content from Spotify on your website. Embed podcast, an album, or other audio and video content to your website and promote your music, share your new podcast episodes with fans, or highlight your favourite album or playlist.",
   "main": "index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "classnames": "^2.3.2",
     "del": "^6.0.0",
     "eslint": "^7.29.0",
-    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb": "^19.0.4",
     "gulp": "^4.0.2",
     "gulp-bump": "^3.2.0",
     "gulp-checktextdomain": "^2.2.2",
@@ -54,7 +54,7 @@
     "laravel-mix": "^6.0.43",
     "less": "^4.1.3",
     "less-loader": "^11.1.0",
-    "postcss": "^8.3.5",
+    "postcss": "^8.4.35",
     "querystring-es3": "^0.2.1",
     "rtlcss": "^3.5.0",
     "stylelint": "^13.13.1",
@@ -63,7 +63,7 @@
   "dependencies": {
     "@wordpress/hooks": "^3.11.0",
     "@wordpress/i18n": "^4.11.0",
-    "axios": "^0.28.0",
+    "axios": "^1.6.7",
     "jquery": "^3.6.0"
   }
 }
