@@ -40,7 +40,7 @@
     "del": "^6.0.0",
     "eslint": "^9.0.0",
     "eslint-config-airbnb": "^19.0.4",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-bump": "^3.2.0",
     "gulp-checktextdomain": "^2.2.2",
     "gulp-eslint": "^6.0.0",
