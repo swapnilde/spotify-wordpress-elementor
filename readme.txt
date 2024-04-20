@@ -90,6 +90,10 @@ Yes, you need to create a Spotify Developer Account to get the Client ID and Cli
 
 == Changelog ==
 
+= 1.0.1 =
+* Improvement: Compatibility with latest WordPress version.
+* Improvement: Compatibility with latest Elementor version.
+
 = 1.0.0 =
 * Initial release
 
